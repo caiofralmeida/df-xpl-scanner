@@ -19,9 +19,11 @@ class Item implements \JsonSerializable
      */
     protected $url;
 
-    public function __construct()
+    public function __construct($nome, $url)
     {
         $this->id = uniqid();
+        $this->nome = $nome;
+        $this->url  = $url;
     }
 
     /**

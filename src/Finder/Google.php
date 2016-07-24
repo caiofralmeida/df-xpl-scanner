@@ -43,13 +43,8 @@ class Google extends Provider
             $result = new SearchResult();
 
             foreach($elements as $element) {
-                $item = (new Item())
-                    ->setNome($element->nodeValue)
-                    ->setUrl(
-                        $this->formatUrl(
-                            $element->getAttribute('href')
-                        )
-                    );
+                $url = $this->formatUrl($element->getAttribute('href'));
+                $item = new Item($element->nodeValue, $url);
                 $result[] = $item;
             }
 
