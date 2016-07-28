@@ -15,8 +15,7 @@ class UserAgentGenerator
     public static function getRandom()
     {
         self::$list = self::getList();
-        $key = array_rand(self::$list, 1);
-        return self::$list[$key];
+        return self::$list[array_rand(self::$list)];
     }
 
     /**
