@@ -1,10 +1,7 @@
 # Download Source Code Exploit Scanner
 
 ## Usage
-`./app finder "my-d0rk" --limit 50 --output=/tmp/foo.bar`
-
 ```
-Usage:
   ./app finder [options] [--] <term>
 
 Arguments:
@@ -21,3 +18,6 @@ Options:
   -/tmp/df-xpl-scanner/result-{uid}.txt, --output[=OUTPUT]  Arquivo de saída
   -v|vv|vvv, --verbose                                      Increase the verbosity of messages: 1 for normal output, 2 for more verbose output and 3 for debug
   ```
+
+### Example
+`./app finder "my-d0rk" --limit 50 --output=/tmp/foo.bar`
