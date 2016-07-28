@@ -44,7 +44,6 @@ class Google extends Provider
                 ]
             ]);
 
-            //$parser = new Parser\GoogleHtmlPage(new \DOMDocument());
             $elements = $this->parser->parse($result->getBody());
 
             $result = new SearchResult();
