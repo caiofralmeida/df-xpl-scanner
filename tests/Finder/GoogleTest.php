@@ -26,7 +26,7 @@ class GoogleHtmlPageTest extends \PHPUnit_Framework_TestCase
 
         $finderProvider = new Google($clientMock, $parser);
 
-        $result = $finderProvider->find('xpto');
+        $result = $finderProvider->getResult('xpto');
         $this->assertCount(1, $result);
     }
 
@@ -50,6 +50,6 @@ class GoogleHtmlPageTest extends \PHPUnit_Framework_TestCase
 
         $finderProvider = new Google($clientMock, $parser);
 
-        $result = $finderProvider->find('nosuch');
+        $result = $finderProvider->getResult('nosuch');
     }
 }

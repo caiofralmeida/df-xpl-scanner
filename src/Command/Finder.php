@@ -47,7 +47,7 @@ class Finder extends Base
               'output',
               getenv('OUTPUT'),
               InputOption::VALUE_OPTIONAL,
-              'Quantidade de resultados'
+              'Arquivo de saída'
           );
     }
 
@@ -58,7 +58,7 @@ class Finder extends Base
      */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $result = $this->finderProvider->find($input->getArgument('term'));
+        $result = $this->finderProvider->getResult($input->getArgument('term'));
 
         foreach($result as $item) {
             $output->writeln('<info>' . $item->getUrl() . '</info>');

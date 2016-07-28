@@ -11,9 +11,37 @@ abstract class Provider
 
     /**
      * @param  string $term
+     * @return SearchResult
+     */
+    public function getResult($term)
+    {
+        $elements = $this->find($term);
+
+        $result = new SearchResult();
+
+        foreach($elements as $element) {
+            $item = $this->createItem($element['nome'], $element['url']);
+            $result[] = $item;
+        }
+
+        return $result;
+    }
+
+    /**
+     * @param  string $term
      * @return CaioFRAlmeida\DfXplScanner\Finder\Result
      */
-    abstract public function find($term);
+    abstract protected function find($term);
+
+    /**
+     * @param  string $nome
+     * @param  string $url
+     * @return Item
+     */
+    protected function createItem($nome, $url)
+    {
+        return new Item($nome, $url);
+    }
 
     /**
      * @param int $total

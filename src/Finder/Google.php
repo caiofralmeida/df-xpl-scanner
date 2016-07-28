@@ -34,7 +34,7 @@ class Google extends Provider
      * @throws NoSuchElementsException
      * @throws GuzzleException
      */
-    public function find($term)
+    protected function find($term)
     {
         try {
             $url = sprintf(getenv('GOOGLE_URLSEARCH'), urlencode($term));
@@ -45,16 +45,16 @@ class Google extends Provider
             ]);
 
             $elements = $this->parser->parse($result->getBody());
-
-            $result = new SearchResult();
+            $data = [];
 
             foreach($elements as $element) {
-                $url = $this->formatUrl($element->getAttribute('href'));
-                $item = new Item($element->nodeValue, $url);
-                $result[] = $item;
+                $data[] = [
+                    'nome' => $element->nodeValue,
+                    'url'  => $element->getAttribute('href')
+                ];
             }
 
-            return $result;
+            return $data;
 
         } catch (NoSuchElementsException $e) {
 
@@ -62,6 +62,15 @@ class Google extends Provider
             echo $e->getResponse()->getBody();die;
             echo ($e->getMessage());die;
         }
+    }
+
+    /**
+     * {@inheritance}
+     */
+    protected function createItem($nome, $url)
+    {
+        $url = $this->formatUrl($url);
+        return parent::createItem($nome, $url);
     }
 
     /**
