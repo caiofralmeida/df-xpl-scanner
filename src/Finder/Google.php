@@ -5,6 +5,7 @@ namespace CaioFRAlmeida\DfXplScanner\Finder;
 use GuzzleHttp\ClientInterface;
 use GuzzleHttp\Exception\GuzzleException;
 use CaioFRAlmeida\DfXplScanner\UserAgent\UserAgentGenerator;
+use CaioFRAlmeida\DfXplScanner\Finder\Parser\GoogleHtmlPage;
 
 class Google extends Provider
 {
@@ -14,11 +15,17 @@ class Google extends Provider
     private $client;
 
     /**
+     * @var GoogleHtmlPage
+     */
+    private $parser;
+
+    /**
      * @param  ClientInterface $client
      */
-    public function __construct(ClientInterface $client)
+    public function __construct(ClientInterface $client, GoogleHtmlPage $parser)
     {
         $this->client = $client;
+        $this->parser = $parser;
     }
 
     /**
@@ -37,8 +44,8 @@ class Google extends Provider
                 ]
             ]);
 
-            $parser = new Parser\GoogleHtmlPage(new \DOMDocument());
-            $elements = $parser->parse($result->getBody());
+            //$parser = new Parser\GoogleHtmlPage(new \DOMDocument());
+            $elements = $this->parser->parse($result->getBody());
 
             $result = new SearchResult();
 

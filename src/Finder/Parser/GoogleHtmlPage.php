@@ -25,7 +25,7 @@ class GoogleHtmlPage
     {
         @$this->parser->loadHTML($content);
         $xpath = new \DOMXpath($this->parser);
-
+        
         $elements = $xpath->query(getenv('GOOGLE_PARSE_QUERY'));
 
         if ($elements->length == 0) {
